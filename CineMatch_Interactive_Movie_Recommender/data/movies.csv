@@ -1,0 +1,37 @@
+movie_id,title,year,genres,rating
+M01,The Shawshank Redemption,1994,Drama|Crime,4.8
+M02,The Godfather,1972,Drama|Crime,4.7
+M03,Oppenheimer,2023,Drama|History|Thriller,4.5
+M04,The Dark Knight,2008,Action|Crime|Drama,4.7
+M05,Interstellar,2014,Sci-Fi|Drama|Adventure,4.6
+M06,Spirited Away,2001,Animation|Fantasy|Adventure,4.6
+M07,The Matrix,1999,Sci-Fi|Action,4.5
+M08,Forrest Gump,1994,Drama|Romance,4.6
+M09,Inception,2010,Sci-Fi|Action|Thriller,4.6
+M10,The Martian,2015,Sci-Fi|Adventure|Drama,4.3
+M11,Dune: Part Two,2024,Sci-Fi|Adventure|Action,4.4
+M12,The Silence of the Lambs,1991,Thriller|Crime|Drama,4.5
+M13,La La Land,2016,Romance|Musical|Drama,4.2
+M14,The Grand Budapest Hotel,2014,Comedy|Adventure,4.3
+M15,Everything Everywhere All at Once,2022,Sci-Fi|Comedy|Action,4.2
+M16,Jurassic Park,1993,Adventure|Sci-Fi|Thriller,4.4
+M17,The Notebook,2004,Romance|Drama,4.0
+M18,Paddington 2,2017,Comedy|Children's|Adventure,4.1
+M19,Get Out,2017,Horror|Thriller|Mystery,4.2
+M20,The Lord of the Rings: The Fellowship of the Ring,2001,Fantasy|Adventure|Action,4.7
+M21,Spider-Man: Into the Spider-Verse,2018,Animation|Action|Adventure,4.5
+M22,Whiplash,2014,Drama|Musical,4.5
+M23,Knives Out,2019,Mystery|Comedy|Crime,4.2
+M24,Alien,1979,Horror|Sci-Fi|Thriller,4.3
+M25,The Princess Bride,1987,Fantasy|Adventure|Romance,4.2
+M26,Mean Girls,2004,Comedy,3.9
+M27,The Lion King,1994,Animation|Children's|Drama,4.4
+M28,Top Gun: Maverick,2022,Action|Drama,4.3
+M29,The Conjuring,2013,Horror|Mystery,4.0
+M30,The Truman Show,1998,Comedy|Drama|Sci-Fi,4.4
+M31,The Incredibles,2004,Animation|Action|Children's,4.3
+M32,The Prestige,2006,Drama|Mystery|Thriller,4.5
+M33,The Social Network,2010,Drama,4.1
+M34,The Hunger Games,2012,Action|Adventure|Sci-Fi,4.0
+M35,The Mummy,1999,Adventure|Action|Fantasy,4.0
+M36,Shrek,2001,Animation|Comedy|Children's|Fantasy,4.1

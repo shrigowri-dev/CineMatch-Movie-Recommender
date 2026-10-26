@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CineMatch | Interactive Movie Recommendations</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand-small"><span class="brand-mark">C</span><span>CineMatch</span></div>
+      <div class="side-label">BROWSE GENRES</div>
+      <nav id="genre-nav" aria-label="Movie genres">
+        <button class="genre active" data-genre="All">✦ &nbsp; All movies</button>
+        {% for genre in ["Drama","Horror","Western","Fantasy","Children's","Romance","Mystery","Animation","Thriller","War","Musical","Sci-Fi","Documentary","Crime","Comedy","Adventure","Film-Noir","Action"] %}
+        <button class="genre" data-genre="{{ genre }}">{{ genre }}</button>
+        {% endfor %}
+      </nav>
+      <div class="sidebar-bottom">
+        <span class="online-dot"></span> AI engine ready
+        <div class="side-foot">25CS301 · Micro Project 07</div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <button class="menu-btn" id="menu-btn" aria-label="Toggle menu">☰</button>
+        <div class="top-title"><span class="logo-icon">✦</span> CineMatch · AI Movie Recommender</div>
+        <label class="theme-toggle"><span id="theme-label">Dark Mode</span><input type="checkbox" id="theme-toggle" checked><span class="toggle-ui"></span></label>
+      </header>
+
+      <section class="content">
+        <div class="hero-row">
+          <div>
+            <div class="eyebrow">PERSONALIZED DISCOVERY</div>
+            <h1>Let me know about you<span class="accent">.</span></h1>
+            <p class="muted">Select movies you enjoy. CineMatch combines search, logical reasoning, probability, learned patterns and neural scoring to personalize your picks.</p>
+          </div>
+          <div class="hero-chip"><span>✦</span> Powered by AI</div>
+        </div>
+
+        <section class="profile-panel">
+          <div class="field age-field">
+            <label for="age">Age</label>
+            <input type="number" id="age" min="13" max="100" value="25">
+          </div>
+          <fieldset class="gender-field">
+            <legend>Gender <span class="muted">(optional)</span></legend>
+            <label class="radio"><input type="radio" name="gender" value="male" checked><span>Male</span></label>
+            <label class="radio"><input type="radio" name="gender" value="female"><span>Female</span></label>
+            <label class="radio"><input type="radio" name="gender" value="prefer-not"><span>Prefer not to say</span></label>
+          </fieldset>
+          <button class="btn btn-primary" id="recommend-btn"><span>✦</span> Recommend</button>
+          <button class="btn btn-ghost" id="clear-btn">Clear Selection</button>
+        </section>
+
+        <section class="movie-section">
+          <div class="section-heading">
+            <div>
+              <div class="eyebrow">YOUR TASTE PROFILE</div>
+              <h2>Find and click movies you've watched</h2>
+              <p class="muted">Select a few movies you know. The more you select, the more personalized your recommendations can be.</p>
+            </div>
+            <div class="selection-count"><strong id="selected-count">0</strong><span>selected</span></div>
+          </div>
+          <div class="toolbar">
+            <div class="toolbar-left">
+              <label class="select-wrap"><span>Genre</span>
+                <select id="genre-filter">
+                  <option>All</option>
+                  {% for genre in ["Action","Adventure","Animation","Children's","Comedy","Crime","Documentary","Drama","Fantasy","Film-Noir","Horror","Musical","Mystery","Romance","Sci-Fi","Thriller","War","Western"] %}
+                  <option>{{ genre }}</option>
+                  {% endfor %}
+                </select>
+              </label>
+              <label class="select-wrap"><span>Order by</span>
+                <select id="sort-order">
+                  <option value="year-desc">Release year: newest</option>
+                  <option value="year-asc">Release year: oldest</option>
+                  <option value="rating-desc">Audience rating</option>
+                  <option value="title-asc">Movie title</option>
+                </select>
+              </label>
+            </div>
+            <div class="search-wrap"><span>⌕</span><input type="search" id="search" placeholder="Search movies..."></div>
+          </div>
+
+          <div class="movie-grid" id="movie-grid">
+            {% for movie in movies %}
+            <button class="movie-card" data-id="{{ movie.movie_id }}" data-title="{{ movie.title|lower }}" data-genres="{{ movie.genres }}" data-year="{{ movie.year }}" data-rating="{{ movie.rating }}" aria-pressed="false">
+              <div class="poster-wrap">
+                <img class="poster" src="{{ movie.poster }}" alt="{{ movie.title }} poster" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="poster-fallback" style="display:none; --poster-hue: {{ loop.index * 43 % 360 }};">
+                  <span class="fallback-kicker">CINEMATCH ORIGINAL</span><span class="fallback-title">{{ movie.title }}</span><span class="fallback-year">{{ movie.year }}</span>
+                </div>
+                <span class="year-badge">{{ movie.year }}</span>
+                <span class="selected-check">✓</span>
+              </div>
+              <div class="card-info">
+                <div class="card-title">{{ movie.title }}</div>
+                <div class="rating-line"><span class="star">★</span><strong>{{ movie.rating }}</strong><span class="out-of">/ 5</span></div>
+                <div class="genre-tags">{% for genre in movie.genres_list[:2] %}<span>{{ genre }}</span>{% endfor %}</div>
+              </div>
+            </button>
+            {% endfor %}
+          </div>
+          <div class="empty-state" id="empty-state" hidden>No movies match your search. Try another title or genre.</div>
+        </section>
+
+        <section class="recommendation-section" id="recommendation-section">
+          <div class="section-heading">
+            <div>
+              <div class="eyebrow">CURATED FOR YOU</div>
+              <h2>Your recommendations</h2>
+              <p class="muted" id="recommend-subtitle">Your personalized results use one integrated AI pipeline across the five course units.</p>
+            </div>
+            <button class="btn btn-ghost small-btn" id="evaluate-btn">Evaluate AI model</button>
+          </div>
+          <div class="recommendation-grid" id="recommendation-grid">
+            <div class="recommend-empty"><div class="sparkle">✦</div><strong>Your next favourite movie is waiting.</strong><span>Select movies above and click Recommend.</span></div>
+          </div>
+          <div class="metrics" id="metrics" hidden></div>
+        </section>
+        <footer><span>✦ CineMatch AI</span><span>Built for 25CS301 Artificial Intelligence · Micro Project 07</span></footer>
+      </section>
+    </main>
+  </div>
+  <div class="toast" id="toast" role="status"></div>
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
